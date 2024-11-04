@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import java.util.List;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +18,7 @@ public class User  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userid;
+    private Long id;
 
     // @Column(name = "account")
     private String account;
@@ -29,6 +31,9 @@ public class User  {
 
     private String updatedBy;
     private LocalDateTime updatedAt;
+
+    @OneToMany(fetch =  FetchType.LAZY, mappedBy = "user")
+    private List<OrderDetail> orderDetailList;
 
 
 }
